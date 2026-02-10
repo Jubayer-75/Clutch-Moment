@@ -196,6 +196,59 @@
         @media (min-width: 769px) {
             .site-nav.glass { border-radius: 12px; }
         }
+
+        /* --- FOOTER SOCIALS --- */
+        .footer-socials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 242, 255, 0.45);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 242, 255, 0.25);
+            background: rgba(0, 242, 255, 0.08);
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: white;
+            stroke-width: 1.6;
+        }
+
+        .social-icon-solid {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .social-link.discord { background: #5865F2; }
+        .social-link.facebook { background: #1877F2; }
+        .social-link.youtube { background: #FF0000; }
+
+        .social-link.discord:hover,
+        .social-link.facebook:hover,
+        .social-link.youtube:hover {
+            filter: brightness(1.08);
+        }
     </style>
 </head>
 <body>
@@ -275,6 +328,24 @@
 
     <footer class="p-10 text-center border-t border-white/10 text-xs text-gray-600 uppercase tracking-widest">
         © 2026 CLUTCH MOMENT - ALL RIGHTS RESERVED
+        <div class="footer-socials" aria-label="Clutch Moment social links">
+            <a class="social-link discord" href="https://discord.gg/MGNYFHEUx" target="_blank" rel="noopener noreferrer" aria-label="Join us on Discord">
+                <svg class="social-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.249.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.919 19.919 0 0 0 5.993 3.05.078.078 0 0 0 .084-.027c.462-.63.873-1.295 1.226-1.993a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.127c.126-.094.252-.192.371-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.099.246.197.372.291a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.891.077.077 0 0 0-.04.106c.36.698.772 1.362 1.225 1.993a.077.077 0 0 0 .084.028 19.9 19.9 0 0 0 6.002-3.05.077.077 0 0 0 .031-.055c.5-5.177-.838-9.673-3.548-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.419-2.157 2.419Zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.419-2.157 2.419Z"/>
+                </svg>
+            </a>
+            <a class="social-link facebook" href="https://www.facebook.com/share/18vTpKd2z3/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+                <svg class="social-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 9h3V6h-3c-1.657 0-3 1.343-3 3v2H8v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1Z"/>
+                </svg>
+            </a>
+            <a class="social-link youtube" href="https://youtube.com/@clutchmoment-589?si=6m9G2z-MALXgbQRu" target="_blank" rel="noopener noreferrer" aria-label="Watch on YouTube">
+                <svg class="social-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#FFFFFF" d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58Z"/>
+                    <path fill="#FF0000" d="M10 15.5v-7l6 3.5-6 3.5Z"/>
+                </svg>
+            </a>
+        </div>
     </footer>
 
     <script>
