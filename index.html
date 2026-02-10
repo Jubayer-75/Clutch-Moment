@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLUTCH MOMENT | Aesthetic Audio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;600;900&display=swap');
+
+        :root {
+            --primary: #00f2ff;
+            --secondary: #bc00ff;
+        }
+
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- NAV GLASSMORPHISM --- */
+        .site-nav {
+            transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, border 0.3s ease;
+        }
+
+        .site-nav.glass {
+            background: rgba(5, 5, 5, 0.55);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4.5vw, 3.75rem);
+        }
+
+        .hero-copy {
+            font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+        }
+
+        .font-sync { font-family: 'Syncopate', sans-serif; }
+
+        /* --- HERO SLIDER CORE --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 300%; 
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(5,5,5,0.9), transparent);
+        }
+
+        /* --- GRADIENT BORDER ANIMATION --- */
+        .gradient-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .gradient-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% 200%;
+            z-index: -1;
+            animation: borderRotate 4s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-card:hover::before {
+            opacity: 1;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        .slider-btn:hover { background: var(--primary); color: black; }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- AUDIO UI --- */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #music-control:hover { background: var(--primary); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .slider-container { height: 75vh; }
+            .slide { padding: 0 7%; }
+        }
+
+        @media (max-width: 768px) {
+            .site-nav {
+                justify-content: flex-start;
+                align-items: center;
+                padding: 10px 14px;
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                border-radius: 14px;
+                background: rgba(5, 5, 5, 0.55);
+                backdrop-filter: blur(14px);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            }
+            .brand-logo { width: 34px; height: 34px; }
+            .brand-wrap { gap: 10px; }
+            body { padding-top: 84px; }
+            .slider-container { height: 70vh; border-radius: 0 0 30px 30px; }
+        }
+
+        @media (max-width: 480px) {
+            .slider-container { height: 65vh; }
+            .slide { padding: 0 6%; }
+        }
+
+        @media (min-width: 769px) {
+            .site-nav.glass { border-radius: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-control" onclick="toggleMusic()">
+        <svg id="musicIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </div>
+
+    <nav id="siteNav" class="site-nav flex items-center p-4 fixed top-0 left-0 z-50">
+        <div class="brand-wrap">
+            <img src="logo.jpeg" alt="Clutch Moment logo" class="brand-logo">
+            <div class="font-sync text-xl font-bold tracking-widest">
+                CLUTCH<span class="gradient-text">MOMENT</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        <div class="slider-wrapper" id="heroSlider">
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2000');">
+                <div class="z-10 max-w-2xl text-center md:text-left">
+                    <h2 class="hero-title font-black font-sync mb-4">MASTER THE <br><span class="gradient-text">ARENA.</span></h2>
+                    <p class="hero-copy text-gray-300 mb-6">Experience the next generation of football training through data-driven insights.</p>
+                    <button class="bg-[var(--primary)] text-black font-bold px-8 py-3 uppercase text-sm">Get Started</button>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2000');">
+                <div class="z-10 max-w-2xl text-center md:text-left">
+                    <h2 class="hero-title font-black font-sync mb-4">PRECISE <br><span class="gradient-text">TACTICS.</span></h2>
+                    <p class="hero-copy text-gray-300 mb-6">Analyze every move with our real-time spatial intelligence system.</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=2000');">
+                <div class="z-10 max-w-2xl text-center md:text-left">
+                    <h2 class="hero-title font-black font-sync mb-4">DATA <br><span class="gradient-text">DRIVEN.</span></h2>
+                    <p class="hero-copy text-gray-300 mb-6">Unlock your potential using professional-grade performance metrics.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-btn prev" onclick="moveSlide(-1)">❮</div>
+        <div class="slider-btn next" onclick="moveSlide(1)">❯</div>
+    </div>
+
+    <main class="py-16 px-6 md:py-20 md:px-10">
+        <section id="basics" class="mb-20">
+            <h3 class="text-3xl font-sync mb-10 text-center">CORE <span class="text-[var(--primary)]">FEATURES</span></h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="gradient-card group transition-transform hover:-translate-y-2">
+                    <div class="text-[var(--primary)] text-3xl mb-4">01</div>
+                    <h4 class="font-bold text-xl mb-2">Live Tracking</h4>
+                    <p class="text-gray-400 text-sm">Real-time GPS and velocity monitoring for every player on the field.</p>
+                </div>
+                <div class="gradient-card group transition-transform hover:-translate-y-2">
+                    <div class="text-[var(--secondary)] text-3xl mb-4">02</div>
+                    <h4 class="font-bold text-xl mb-2">AI Coaching</h4>
+                    <p class="text-gray-400 text-sm">Get instant feedback on your positioning and ball control skills.</p>
+                </div>
+                <div class="gradient-card group transition-transform hover:-translate-y-2">
+                    <div class="text-[var(--primary)] text-3xl mb-4">03</div>
+                    <h4 class="font-bold text-xl mb-2">3D Analysis</h4>
+                    <p class="text-gray-400 text-sm">Review your match highlights in a fully immersive 3D environment.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="metrics" class="gradient-card text-center py-20">
+            <h2 class="text-4xl font-black font-sync mb-4">READY TO JOIN?</h2>
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">Join thousands of athletes who are already using Clutch Moment to dominate their game.</p>
+            <button class="bg-white text-black font-black px-12 py-4 rounded-full hover:scale-110 transition">BECOME A PRO</button>
+        </section>
+    </main>
+
+    <footer class="p-10 text-center border-t border-white/10 text-xs text-gray-600 uppercase tracking-widest">
+        © 2026 CLUTCH MOMENT - ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const slider = document.getElementById('heroSlider');
+        const bgMusic = document.getElementById('bgMusic');
+        const siteNav = document.getElementById('siteNav');
+        let isMuted = true;
+
+        // Function to handle music
+        function toggleMusic() {
+            if (isMuted) {
+                bgMusic.play();
+                bgMusic.volume = 0.3; // Low volume for aesthetic feel
+                document.getElementById('musicIcon').innerHTML = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+            } else {
+                bgMusic.pause();
+                document.getElementById('musicIcon').innerHTML = '<line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v6l5 4V5l-5 4zm3-4v14M2 9h4l5-4v14l-5-4H2V9z"></path>'; // Simplistic mute icon
+            }
+            isMuted = !isMuted;
+        }
+
+        // Auto-play attempt on first interaction (Browser policy requirement)
+        window.addEventListener('click', () => {
+            if(isMuted) {
+                // Uncomment if you want it to auto-start on first click
+                // toggleMusic();
+            }
+        }, { once: true });
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        }
+
+        function updateNavGlass() {
+            if (window.scrollY > 10) {
+                siteNav.classList.add('glass');
+            } else {
+                siteNav.classList.remove('glass');
+            }
+        }
+
+        window.addEventListener('scroll', updateNavGlass);
+        updateNavGlass();
+
+        setInterval(() => moveSlide(1), 5000);
+    </script>
+</body>
+</html>
