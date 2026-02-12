@@ -19,6 +19,38 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
+        /* --- LOADING OVERLAY --- */
+        #loader-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(5, 5, 5, 0.92);
+            z-index: 9999;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-ball {
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            animation: spin 1s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.35));
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         /* --- NAV GLASSMORPHISM --- */
         .site-nav {
@@ -252,6 +284,9 @@
     </style>
 </head>
 <body>
+    <div id="loader-overlay" aria-live="polite" aria-label="Loading">
+        <span class="loader-ball" aria-hidden="true">⚽</span>
+    </div>
 
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
@@ -394,6 +429,14 @@
         updateNavGlass();
 
         setInterval(() => moveSlide(1), 5000);
+        
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader-overlay');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => loader.remove(), 350);
+            }
+        });
     </script>
 </body>
 </html>
